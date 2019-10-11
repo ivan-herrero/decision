@@ -1,19 +1,34 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
+import { Provider as PaperProvider } from 'react-native-paper'
 
-export default function App() {
+import DecisionScreen from './src/screens/DecisionScreen/DecisionScreen'
+import rootReducer from './src/reducers'
+
+const AppNavigator = createStackNavigator(
+  {
+    Decision: DecisionScreen
+  },
+  {
+    initialRouteName: 'Decision'
+  }
+)
+
+const Navigation = createAppContainer(AppNavigator)
+
+const store = createStore(rootReducer)
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <Provider store={store}>
+      <PaperProvider>
+        <Navigation />
+      </PaperProvider>
+    </Provider>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    flex: 1,
-    justifyContent: 'center',
-  },
-})
+export default App
