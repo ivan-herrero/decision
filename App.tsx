@@ -5,19 +5,20 @@ import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import { Provider as PaperProvider } from 'react-native-paper'
 
-import DecisionScreen from './src/screens/DecisionScreen/DecisionScreen'
 import rootReducer from './src/reducers'
+import NavigationService from './src/navigation/navigationService'
+import DecisionScreen from './src/screens/DecisionScreen/DecisionScreen'
 
-const AppNavigator = createStackNavigator(
+const stackNavigator = createStackNavigator(
   {
-    Decision: DecisionScreen
+    Decision: DecisionScreen,
   },
   {
     initialRouteName: 'Decision'
   }
 )
 
-const Navigation = createAppContainer(AppNavigator)
+const NavigationContainer = createAppContainer(stackNavigator)
 
 const store = createStore(rootReducer)
 
@@ -25,7 +26,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PaperProvider>
-        <Navigation />
+        <NavigationContainer ref={ref => NavigationService.setTopLevelNavigator(ref)} />
       </PaperProvider>
     </Provider>
   )
