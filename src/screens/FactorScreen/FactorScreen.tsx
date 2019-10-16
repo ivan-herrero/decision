@@ -3,12 +3,12 @@ import { Text, View } from 'react-native'
 
 import styles from './styles'
 
-const DecisionScreen = () => {
+const FactorScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Decision</Text>
+      <Text>Factor</Text>
     </View>
   )
 }
 
-export default DecisionScreen
+export default FactorScreen

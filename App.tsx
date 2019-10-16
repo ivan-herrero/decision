@@ -1,34 +1,20 @@
 import React from 'react'
 import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import { createAppContainer } from 'react-navigation'
-import { createStackNavigator } from 'react-navigation-stack'
+import { Provider as ReduxProvider } from 'react-redux'
 import { Provider as PaperProvider } from 'react-native-paper'
 
 import rootReducer from './src/reducers'
-import NavigationService from './src/navigation/navigationService'
-import DecisionScreen from './src/screens/DecisionScreen/DecisionScreen'
-
-const stackNavigator = createStackNavigator(
-  {
-    Decision: DecisionScreen,
-  },
-  {
-    initialRouteName: 'Decision'
-  }
-)
-
-const NavigationContainer = createAppContainer(stackNavigator)
+import { App as AppContainer } from './src/components/App'
 
 const store = createStore(rootReducer)
 
 const App = () => {
   return (
-    <Provider store={store}>
+    <ReduxProvider store={store}>
       <PaperProvider>
-        <NavigationContainer ref={ref => NavigationService.setTopLevelNavigator(ref)} />
+        <AppContainer />
       </PaperProvider>
-    </Provider>
+    </ReduxProvider>
   )
 }
 
