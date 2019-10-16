@@ -1,14 +1,12 @@
 import { combineReducers } from 'redux'
+import { stepReducer } from './stepReducer'
 
-const mockReducer = (state = {}, action) => {
-  switch (action.type) {
-  default:
-    return state
-  }
+export interface State {
+  step: number;
 }
 
-const rootReducer = combineReducers({
-  mockState: mockReducer
+const rootReducer = combineReducers<State>({
+  step: stepReducer
 })
 
 export default rootReducer
